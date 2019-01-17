@@ -1,12 +1,22 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://beta.ionicframework.com/docs/">docs</a> will be your guide.</p>
+  <ion-tabs selectedIndex="0">
+    <ion-tab-bar color="white" slot="bottom" >
+      <ion-tab-button tab="movie-list">
+        <ion-label>Movies</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="serie-list">
+        <ion-label>Series</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+
+  
+  <!-- <ion-searchbar [(ngModel)]="searchValue" [showCancelButton]="true" (ionInput)="onInput($event)"></ion-searchbar> -->
+  <!-- <p *ngIf="error != null"> Erreur : {{error}} </p>
+  <div *ngIf="movie != null">
+    <p> Film : </p>
+    <p *ngFor="let item of movie | keyvalue">
+      {{item.key}} : {{item.value}}
+    </p>
+  </div> -->
 </ion-content>

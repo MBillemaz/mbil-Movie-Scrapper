@@ -1,6 +1,8 @@
 {
   "name": "MovieScrapper",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "67bcac16"
 }

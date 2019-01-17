@@ -14,10 +14,14 @@ import { HomePage } from './home.page';
     RouterModule.forChild([
       {
         path: '',
-        component: HomePage
-      }
+        component: HomePage,
+        children: [
+          { path: 'movie-list', loadChildren: '../movie-list/movie-list.module#MovieListPageModule' },
+          { path: 'serie-list', loadChildren: '../serie-list/serie-list.module#SerieListPageModule' }
+        ]
+      },
     ])
   ],
   declarations: [HomePage]
 })
-export class HomePageModule {}
+export class HomePageModule { }

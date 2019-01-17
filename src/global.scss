@@ -9,3 +9,55 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+.cardList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .card {
+
+    position: relative;
+    text-align: center;
+    background-size: cover;
+    width: 23%;
+
+    ion-img {
+      position: relative;
+      height: 100%;
+    }
+
+    @media only screen and (max-width: 768px) {
+      /* For mobile phones: */
+      width: 90%;
+    }
+
+    .card-content {
+      color: white;
+
+      letter-spacing: -1px;
+      background: rgb(0, 0, 0);
+      /* fallback color */
+      background: rgba(0, 0, 0, 0.7);
+      // padding: 10px;
+      // display: flex;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+
+      .title {
+        font: bold 24px/45px Helvetica, Sans-Serif;
+      }
+
+      .year {
+        text-align: right;
+        margin-right: 5%;
+        margin-bottom: 1%;
+        font-family: Helvetica, sans-serif
+      }
+    }
+
+
+  }
+}
