@@ -1,19 +1,28 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Series list</ion-title>
+  <ion-toolbar class="toolbar">
+    <ion-title class="headerTitle" text-center>Series list</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button class="headerButton" icon-only right (click)="updateSearch()">
+        <ion-icon name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
+  <ion-searchbar *ngIf="showSearch" [showCancelButton]="true" (ionChange)="onInput($event)" [debounce]=500></ion-searchbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-searchbar [showCancelButton]="true" (ionChange)="onInput($event)" [debounce]=500></ion-searchbar>
-    <p *ngIf="error != null"> Erreur : {{error}} </p>
-    <div *ngIf="listItem != null" class="cardList">
-      <ion-card class="card" *ngFor="let item of listItem">
-        <ion-img [src]="item.Poster"></ion-img>
-        <div class="card-content">
-          <div class="title">{{item.Title}}</div>
-          <div class="year">{{item.Year}}</div>
-        </div>
-      </ion-card>
-    </div>
-  </ion-content>  
+  <p *ngIf="error != null"> Erreur : {{error}} </p>
+  <div *ngIf="listItem != null" class="cardList">
+    <ion-card class="card" *ngFor="let item of listItem">
+      <img [src]="item.Poster" (error)="setDefaultImage($event)" />
+      <div class="card-content">
+        <div class="card-title">{{item.Title}}</div>
+        <div class="card-year">{{item.Year}}</div>
+      </div>
+    </ion-card>
+  </div>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

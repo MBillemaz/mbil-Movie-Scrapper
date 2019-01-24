@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="movie != null" text-center>{{movie.Title}}</ion-title>
+    <ion-title *ngIf="movie == null" text-center>Movie</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <img [src]="'http://img.omdbapi.com/?apikey=75522b56&h=600&i=' + id" (error)="setDefaultImage($event)" />
+</ion-content>

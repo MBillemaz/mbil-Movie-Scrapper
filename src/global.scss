@@ -10,6 +10,18 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
+// .toolbar {
+//   .headerTitle {
+//     display: block;
+//     float: left;
+//   }
+
+//   .headerButton {
+//     display: block;
+//     float: right;
+//   }
+// }
+
 .cardList {
   display: flex;
   flex-direction: row;
@@ -46,11 +58,11 @@
       bottom: 0;
       width: 100%;
 
-      .title {
+      .card-title {
         font: bold 24px/45px Helvetica, Sans-Serif;
       }
 
-      .year {
+      .card-year {
         text-align: right;
         margin-right: 5%;
         margin-bottom: 1%;

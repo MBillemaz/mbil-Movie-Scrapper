@@ -11,7 +11,6 @@ import { Injectable } from '@angular/core';
 export class DataProviderService {
 
     private dataLink = 'http://www.omdbapi.com/?apikey=75522b56';
-    private posterLink = 'http://img.omdbapi.com/?apikey=75522b56';
 
     constructor(private http: HttpProviderService) {
 
@@ -34,12 +33,21 @@ export class DataProviderService {
         return this.http.get(this.dataLink, { ...request }, {});
     }
 
-    public ResearchByName(title: string, type: 'movie' | 'series' | 'episode') {
+    public ResearchByName(title: string, type: 'movie' | 'series' | 'episode', page?: number) {
         const request: MovieSearch = {
             s: title,
-            type: type
+            type: type,
+            page: page ? page.toString() : '1'
         };
 
         return this.http.get(this.dataLink, { ...request }, {});
     }
+
+    // public getImage(id: string) {
+    //     const request = {
+    //         i: id
+    //     };
+
+    //     return this.http.get(this.posterLink, { ...request }, { responseType: 'blob' });
+    // }
 }
