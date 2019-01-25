@@ -21,6 +21,9 @@
 //     float: right;
 //   }
 // }
+body {
+  color: --ion-text-color !important;
+}
 
 .cardList {
   display: flex;

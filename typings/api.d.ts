@@ -1,13 +1,17 @@
 
 export interface MovieRequest {
+    apikey: string;
     i?: string;
     t?: string;
     type?: 'movie' | 'series' | 'episode';
     plot?: string;
     y?: string;
+    Season?: string,
+    Episode?: string
 }
 
 export interface MovieSearch {
+    apikey: string;
     s: string;
     type?: 'movie' | 'series' | 'episode';
     y?: string;
@@ -17,7 +21,7 @@ export interface MovieSearch {
 export interface Season {
     Title: string;
     Season: string;
-    totalSeason: string;
+    totalSeasons: string;
     Episodes: Episode[];
 }
 
@@ -25,7 +29,34 @@ export interface Episode {
     Title: string;
     ReleasedEpisode: string;
     imdbRating: string;
-    imdbId: string;
+    imdbID: string;
+}
+
+export interface EpisodeDetail {
+    Title: string;
+    Year: string;
+    Rated: string;
+    Released: string;
+    Season: string;
+    Episode: string;
+    Runtime: string;
+    Genre: string;
+    Director: string;
+    Writer: string;
+    Actors: string;
+    Plot: string;
+    Language: string;
+    Country: string;
+    Awards: string;
+    Poster: string;
+    Ratings: Rating[];
+    Metascore: string;
+    imdbRating: string;
+    imdbVotes: string;
+    imdbID: string;
+    seriesID: string;
+    Type: string;
+    Response: string;
 }
 
 export interface SearchList {
@@ -36,7 +67,7 @@ export interface SearchList {
     Poster: string;
 }
 
-export interface Movie {
+export interface Data {
     Title: string;
     Year: string;
     Rated: string;
@@ -57,39 +88,13 @@ export interface Movie {
     imdbVotes: string;
     imdbID: string;
     Type: string;
-    totalSeasons: string;
-    DVD:string;
+    Response: string;
+    Website: string;
+    DVD: string;
     BoxOffice: string;
     Production: string;
-    Website: string;
-    Response: string;
-}
-
-export interface Serie {
-    Title: string;
-    Year: string;
-    Rated: string;
-    Released: string;
-    Runtime: string;
-    Genre: string;
-    Director: string;
-    Writer: string;
-    Actors: string;
-    Plot: string;
-    Language: string;
-    Country: string;
-    Awards: string;
-    Poster: string;
-    Ratings: Rating[];
-    Metascore: string;
-    imdbRating: string;
-    imdbVotes: string;
-    imdbID: string;
-    Type: string;
     totalSeasons: string;
-    Response: string
 }
-
 export interface Rating {
     Source: string;
     Value: string;

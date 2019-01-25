@@ -11,12 +11,20 @@ export class HttpProviderService {
 
   private isNative: boolean;
   constructor(private ptl: Platform, private angHttp: HttpClient, private nativeHttp: HTTP) {
-    this.isNative = ptl.is('android') || ptl.is('ios') ? true : false;
+    this.isNative = ptl.is('cordova') ? true : false;
   }
 
   get(url: string, params: { [key: string]: string }, headers: { [key: string]: string }): Promise<HTTPResponse> {
     if (this.isNative) {
-      return this.nativeHttp.get(url, params, headers);
+      return this.nativeHttp.get(url, params, headers).then((x) => {
+        return {
+          data: JSON.parse(x.data),
+          status: x.status,
+          url: x.url,
+          headers: x.headers,
+          error: x.error
+        };
+      });
     } else {
 
       return this.angHttp.get<Object>(url, {

@@ -13,7 +13,7 @@
 <ion-content padding>
   <p *ngIf="error != null"> Erreur : {{error}} </p>
   <div *ngIf="listItem != null" class="cardList">
-    <ion-card class="card" *ngFor="let item of listItem">
+    <ion-card class="card" *ngFor="let item of listItem" [routerLink]="'/details/serie/' + item.imdbID" routerDirection="forward">
       <img [src]="item.Poster" (error)="setDefaultImage($event)" />
       <div class="card-content">
         <div class="card-title">{{item.Title}}</div>

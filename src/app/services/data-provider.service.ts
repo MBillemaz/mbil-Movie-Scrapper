@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 })
 export class DataProviderService {
 
-    private dataLink = 'http://www.omdbapi.com/?apikey=75522b56';
+    private dataLink = 'http://www.omdbapi.com/';
 
     constructor(private http: HttpProviderService) {
 
@@ -19,7 +19,9 @@ export class DataProviderService {
     public getById(id: string) {
 
         const request: MovieRequest = {
-            i: id
+            apikey: '75522b56',
+            i: id,
+            plot: 'full'
         };
 
         return this.http.get(this.dataLink, { ...request }, {});
@@ -27,7 +29,9 @@ export class DataProviderService {
 
     public getByTitle(title: string) {
         const request: MovieRequest = {
-            t: title
+            apikey: '75522b56',
+            t: title,
+            plot: 'full'
         };
 
         return this.http.get(this.dataLink, { ...request }, {});
@@ -35,6 +39,7 @@ export class DataProviderService {
 
     public ResearchByName(title: string, type: 'movie' | 'series' | 'episode', page?: number) {
         const request: MovieSearch = {
+            apikey: '75522b56',
             s: title,
             type: type,
             page: page ? page.toString() : '1'
@@ -43,11 +48,13 @@ export class DataProviderService {
         return this.http.get(this.dataLink, { ...request }, {});
     }
 
-    // public getImage(id: string) {
-    //     const request = {
-    //         i: id
-    //     };
+    public getSeason(id: string, season: string) {
+        const request: MovieRequest = {
+            apikey: '75522b56',
+            i: id,
+            Season: season
+        };
 
-    //     return this.http.get(this.posterLink, { ...request }, { responseType: 'blob' });
-    // }
+        return this.http.get(this.dataLink, { ...request }, {});
+    }
 }

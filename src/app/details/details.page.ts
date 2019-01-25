@@ -1,16 +1,17 @@
-import { Movie } from './../../../typings/api.d';
-import { DataProviderService } from './../services/data-provider.service';
+import { Data } from './../../../typings/api.d';
+import { DataProviderService } from '../services/data-provider.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-movie',
-  templateUrl: './movie.page.html',
-  styleUrls: ['./movie.page.scss'],
+  templateUrl: './details.page.html',
+  styleUrls: ['./details.page.scss'],
 })
-export class MoviePage implements OnInit {
+export class DetailsPage implements OnInit {
 
-  public movie: Movie;
+  public item: Data;
+  public type;
   public id;
   private tryPoster = false;
 
@@ -19,8 +20,9 @@ export class MoviePage implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
+      this.type = params['type'];
       this.dataProvider.getById(this.id).then((x) => {
-        this.movie = x.data;
+        this.item = x.data;
       });
     });
   }
@@ -29,10 +31,14 @@ export class MoviePage implements OnInit {
     if (this.tryPoster) {
       image.target.src = 'assets/img/none.jpg';
     } else {
-      image.target.src = this.movie.Poster;
+      image.target.src = this.item.Poster;
       this.tryPoster = true;
     }
 
+  }
+
+  counter(i: string) {
+    return new Array(parseInt(i, 10));
   }
 
 }
