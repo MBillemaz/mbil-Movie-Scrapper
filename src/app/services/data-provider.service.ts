@@ -37,7 +37,7 @@ export class DataProviderService {
         return this.http.get(this.dataLink, { ...request }, {});
     }
 
-    public ResearchByName(title: string, type: 'movie' | 'series' | 'episode', page?: number) {
+    public ResearchByName(title: string, type: 'movie' | 'series', page?: number) {
         const request: MovieSearch = {
             apikey: '75522b56',
             s: title,

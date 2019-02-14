@@ -5,6 +5,11 @@
     </ion-buttons>
     <ion-title *ngIf="item != null" text-center>{{item.Title}}</ion-title>
     <ion-title *ngIf="item == null" text-center>Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button icon-only (click)="setLiked()">
+        <ion-icon [name]="liked ? 'heart' : 'heart-empty'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -78,14 +83,14 @@
     </ion-item>
   </ion-list>
 
-  <ion-list *ngIf="type == 'serie'">
+  <ion-list *ngIf="type == 'series'">
     <ion-item>
       <ion-label text-center>
         <p> Number of seasons:</p> {{item.totalSeasons}}
       </ion-label>
     </ion-item>
     <ng-container *ngIf="item.totalSeasons !== 'N/A'">
-      <ion-item *ngFor="let in of counter(item.totalSeasons); let i = index" [routerLink]="'/season/' + item.imdbID + '/' + i" routerDirection="forward">
+      <ion-item *ngFor="let in of counter(item.totalSeasons); let i = index" [routerLink]="'/season/' + item.imdbID + '/' + (i + 1)" routerDirection="forward">
         <ion-label text-center>Season {{i + 1}}</ion-label>
       </ion-item>
     </ng-container>

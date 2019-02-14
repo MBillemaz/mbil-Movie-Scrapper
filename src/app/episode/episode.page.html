@@ -4,7 +4,12 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title *ngIf="item != null" text-center>{{item.Title}} </ion-title>
-    <ion-title *ngIf="item == null" text-center>Season</ion-title>
+    <ion-title *ngIf="item == null" text-center>Episode</ion-title>
+    <ion-buttons slot="end">
+      <ion-button icon-only (click)="setLiked()">
+        <ion-icon [name]="liked ? 'heart' : 'heart-empty'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

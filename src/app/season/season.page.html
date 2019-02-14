@@ -16,7 +16,8 @@
         <p>Season:</p> {{item.Season}} / {{item.totalSeasons}}
       </ion-label>
     </ion-item>
-    <ion-item *ngFor="let episode of item.Episodes; let i = index" [routerLink]="'/episode/' + episode.imdbID" routerDirection="forward">
+    <ion-item *ngFor="let episode of item.Episodes; let i = index" [routerLink]="'/episode/' + episode.imdbID + '/' + item.Title"
+      routerDirection="forward">
       <ion-label text-center>
         {{i + 1}} - {{episode.Title}}
       </ion-label>

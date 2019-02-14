@@ -1,23 +1,36 @@
+import { StorageProviderService } from './../services/storage-provider.service';
+import { Favorites } from './../../../typings/storage.d';
+import { ActivatedRoute } from '@angular/router';
 import { DataProviderService } from './../services/data-provider.service';
 import { Component, OnInit } from '@angular/core';
 import { SearchList } from 'typings/api';
 
 @Component({
-  selector: 'app-movie-list',
-  templateUrl: './movie-list.page.html',
-  styleUrls: ['./movie-list.page.scss'],
+  selector: 'app-list',
+  templateUrl: './list.page.html',
+  styleUrls: ['./list.page.scss'],
 })
-export class MovieListPage implements OnInit {
+export class ListPage implements OnInit {
 
+  public type: 'movie' | 'series';
   public listItem: SearchList[] = [];
+  public listLike: boolean[] = [];
   public error: string = null;
   public showSearch = true;
 
+  public favorites: Favorites;
   private actualTitle = null;
   private actualPage = 1;
-  constructor(public dataProvider: DataProviderService) { }
+  constructor(public dataProvider: DataProviderService, private route: ActivatedRoute, private storage: StorageProviderService) { }
 
   ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.type = params['type'];
+    });
+
+    this.storage.getFavorites().then((x) => {
+      this.favorites = x;
+    });
   }
 
   onInput(event) {
@@ -25,7 +38,7 @@ export class MovieListPage implements OnInit {
     this.actualTitle = title;
     // console.log(title);
     if (title !== '') {
-      this.dataProvider.ResearchByName(title, 'movie').then((x) => {
+      this.dataProvider.ResearchByName(title, this.type).then((x) => {
         if (x.data.Response === 'False') {
           this.error = x.data.Error;
           this.listItem = [];
@@ -34,6 +47,7 @@ export class MovieListPage implements OnInit {
           this.error = null;
         }
         this.actualPage = 1;
+        this.checkLikes();
       }).catch((e) => {
         this.error = e.message;
       });
@@ -42,7 +56,6 @@ export class MovieListPage implements OnInit {
       this.error = null;
       this.actualPage = 1;
     }
-
   }
 
   updateSearch() {
@@ -54,13 +67,19 @@ export class MovieListPage implements OnInit {
   }
 
   doInfinite(infiniteScroll) {
-    this.dataProvider.ResearchByName(this.actualTitle, 'movie', ++this.actualPage).then((x) => {
+    this.dataProvider.ResearchByName(this.actualTitle, this.type, ++this.actualPage).then((x) => {
 
       if (x.data.Response === 'True') {
         this.listItem = this.listItem.concat(x.data.Search);
+        this.checkLikes();
       }
       infiniteScroll.target.complete();
     });
+  }
+
+  checkLikes() {
+    this.listLike = this.listItem.map((item) => this.favorites[this.type].some((x) => x.id === item.imdbID));
+    console.log(this.listItem, this.listLike);
   }
 
 }

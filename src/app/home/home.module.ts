@@ -14,8 +14,7 @@ import { HomePage } from './home.page';
         path: '',
         component: HomePage,
         children: [
-          { path: 'movie-list', loadChildren: '../movie-list/movie-list.module#MovieListPageModule' },
-          { path: 'serie-list', loadChildren: '../serie-list/serie-list.module#SerieListPageModule' }
+          { path: 'list/:type', loadChildren: '../list/list.module#ListPageModule' }
         ]
       },
     ])
