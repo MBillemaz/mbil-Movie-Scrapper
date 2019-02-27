@@ -2,7 +2,6 @@ import { Platform } from '@ionic/angular';
 import { HTTP, HTTPResponse } from '@ionic-native/http/ngx';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

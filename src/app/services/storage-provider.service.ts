@@ -1,5 +1,7 @@
+import { Favorites } from './../../../typings/storage.d';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +9,9 @@ import { Storage } from '@ionic/storage';
 export class StorageProviderService {
 
   constructor(private storage: Storage) { }
+  public subject = new Subject<Favorites>();
 
-  getFavorites() {
+  getFavorites(): Promise<Favorites> {
     return this.storage.get('favorites');
   }
 
@@ -17,7 +20,12 @@ export class StorageProviderService {
   }
 
   set(key: string, val: any) {
-    return this.storage.set(key, val);
+    return this.storage.set(key, val).then(() => {
+      this.storage.get(key).then((result) => {
+        this.subject.next(result);
+        return true;
+      });
+    });
   }
 
   add(key: string, val: any) {

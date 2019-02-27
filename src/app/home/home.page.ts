@@ -6,12 +6,12 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+    public selected = 'movie';
     constructor() {
-
     }
 
-
-
-
+    update(tab: string) {
+        this.selected = tab;
+    }
 
 }

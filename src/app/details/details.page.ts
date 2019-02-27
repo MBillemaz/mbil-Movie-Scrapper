@@ -32,6 +32,7 @@ export class DetailsPage implements OnInit {
 
       this.storage.getFavorites().then((fav: Favorites) => {
         this.favorites = fav;
+        console.log(this.type, fav);
         if (fav[this.type].some((x) => {
           return x.id === this.id;
         })) {

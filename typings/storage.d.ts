@@ -8,16 +8,16 @@ export interface Favorites {
 }
 
 export interface StoredData {
-    title: String;
-    id: String;
-    poster: String;
+    title: string;
+    id: string;
+    poster: string;
     // likedSeason?: number[];
     likedEpisode?: StoredEpisode[];
 }
 
 export interface StoredEpisode {
-    title: String;
-    id: String;
-    episode: String;
-    season: String;
+    title: string;
+    id: string;
+    episode: string;
+    season: string;
 }

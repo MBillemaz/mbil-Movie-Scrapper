@@ -79,7 +79,6 @@ export class ListPage implements OnInit {
 
   checkLikes() {
     this.listLike = this.listItem.map((item) => this.favorites[this.type].some((x) => x.id === item.imdbID));
-    console.log(this.listItem, this.listLike);
   }
 
 }

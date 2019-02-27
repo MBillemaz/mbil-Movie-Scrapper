@@ -1,9 +1,32 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>favorites</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-
-</ion-content>
+    <ion-toolbar class="toolbar">
+      <ion-title class="headerTitle" text-center>Favorites</ion-title>
+      <ion-buttons slot="primary">
+        <ion-button class="headerButton" icon-only right (click)="updateSearch()">
+          <ion-icon name="search"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-item class="Toggle">
+      <ion-label>Movies</ion-label>
+      <ion-toggle mode="md" (ionChange)="changeType($event)"></ion-toggle>
+      <ion-label>Series</ion-label>
+    </ion-item>
+    
+    <ion-searchbar *ngIf="showSearch" [showCancelButton]="true" (ionChange)="onInput($event)" [debounce]=500></ion-searchbar>
+  </ion-header>
+  
+  <ion-content padding>
+      <p *ngIf="error != null"> Erreur : {{error}} </p>
+      <div *ngIf="listItem != null" class="cardList">
+        <ion-card class="card" *ngFor="let item of listItem; let i = index" [routerLink]="(type == 'movie' ? '/details/movie/' : '/details/series/') + item.imdbID"
+          routerDirection="forward">
+          <img [src]="item.Poster" (error)="setDefaultImage($event)" />
+          <div class="card-content">
+            <div class="card-title">{{item.Title}}</div>
+            <div class="card-year">{{item.Year}}</div>
+            <ion-icon class="card-fav" name="heart"></ion-icon>
+          </div>
+        </ion-card>
+      </div>
+    </ion-content>

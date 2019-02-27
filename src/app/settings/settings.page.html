@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button></ion-back-button>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <p *ngIf="info != null"> Info : {{info}} </p>
+  <div>
+    <ion-button (click)='downloadFile()'>Export favorites</ion-button>
+    <div id="download"></div>
+  </div>
+  <div>
+    <input #uploader type="file" (change)="onFileChange($event)" accept=".json,application/json" hidden="true"/>
+    <ion-button type="submit" (click)='uploader.click()'>Upload favorites</ion-button>
+  </div>
+
+</ion-content>
