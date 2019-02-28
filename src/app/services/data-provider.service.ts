@@ -1,8 +1,5 @@
 import { HttpProviderService } from './http-provider.service';
-import { Platform } from '@ionic/angular';
 import { MovieRequest, MovieSearch } from '../../../typings/api';
-import { HTTP } from '@ionic-native/http/ngx';
-import { HttpClient } from '@angular/Common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({

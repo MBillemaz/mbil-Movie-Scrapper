@@ -8,12 +8,12 @@
 <ion-content padding>
   <p *ngIf="info != null"> Info : {{info}} </p>
   <div>
-    <ion-button (click)='downloadFile()'>Export favorites</ion-button>
+    <ion-button (click)='downloadJsonFile()'>Export favorites in json file</ion-button>
     <div id="download"></div>
   </div>
   <div>
-    <input #uploader type="file" (change)="onFileChange($event)" accept=".json,application/json" hidden="true"/>
-    <ion-button type="submit" (click)='uploader.click()'>Upload favorites</ion-button>
+    <input #uploader type="file" (change)="onJsonFileChange($event)" accept=".json,application/json" hidden="true"/>
+    <ion-button type="submit" (click)='uploader.click()'>Upload favorites with json file</ion-button>
   </div>
 
 </ion-content>
