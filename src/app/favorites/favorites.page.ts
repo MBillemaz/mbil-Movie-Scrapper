@@ -21,6 +21,9 @@ export class FavoritesPage {
   public actualPage = 1;
 
   constructor(public dataProvider: DataProviderService, private storage: StorageProviderService) {
+  }
+
+  ionViewDidLoad() {
     this.storage.getFavorites().then((x) => {
       this.favorites = x;
       this.allItems = { movie: [], series: [] };
@@ -52,6 +55,7 @@ export class FavoritesPage {
           if (actualIndex === -1) {
             this.allItems[type].splice(index, 1);
             this.listItem.splice(index, 1);
+            console.log('remove', index);
           } else {
             fav[type].splice(actualIndex, 1);
           }
@@ -64,6 +68,7 @@ export class FavoritesPage {
             this.allItems[type].push(result.data);
             if (type === this.type) {
               this.listItem.push(result.data);
+              console.log('add', result.data);
             }
           }).catch((e) => {
             this.error = e.message;
@@ -71,7 +76,7 @@ export class FavoritesPage {
           });
         });
       });
-
+      console.log('all', this.allItems);
     });
   }
 

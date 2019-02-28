@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { FileStorageService } from './../services/file-storage.service';
 import { Favorites } from 'typings/storage';
 import { StorageProviderService } from './../services/storage-provider.service';
 import { Component, OnInit } from '@angular/core';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-import { File } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-settings',
@@ -13,36 +11,35 @@ import { File } from '@ionic-native/file/ngx';
 export class SettingsPage implements OnInit {
 
   public info;
-  constructor(public storage: StorageProviderService, public http: HttpClient, private transfer: FileTransfer, private file: File) { }
+  constructor(public storage: StorageProviderService, public fileStorage: FileStorageService) { }
 
   ngOnInit(): void {
-  }
-
-  downloadJsonFile() {
-    this.storage.getFavorites().then((fav) => {
-      const data = 'data:text/json;charser=utf8,' + encodeURIComponent(JSON.stringify(fav));
-      // this.downloadFile(data, 'favorites.json');
-      const a = document.createElement('a');
-      a.href = data;
-      a.download = 'favorites.json';
-      document.getElementById('download').appendChild(a);
-      a.click();
-      document.getElementById('download').removeChild(a);
-    }).catch((e) => console.log(e));
   }
 
   // downloadJsonFile() {
   //   this.storage.getFavorites().then((fav) => {
   //     const data = 'data:text/json;charser=utf8,' + encodeURIComponent(JSON.stringify(fav));
+  //     // this.downloadFile(data, 'favorites.json');
+  //     const a = document.createElement('a');
+  //     a.href = data;
+  //     a.download = 'favorites.json';
+  //     document.getElementById('download').appendChild(a);
+  //     a.click();
+  //     document.getElementById('download').removeChild(a);
 
-  //     const fileTransfer: FileTransferObject = this.transfer.create();
-  //     fileTransfer.download(data, this.file.externalDataDirectory + 'favorites.json').then((entry) => {
-  //       console.log('download complete: ' + entry.toURL());
-  //     }, (error) => {
-  //       // handle error
-  //     });
   //   }).catch((e) => console.log(e));
   // }
+
+  downloadJsonFile() {
+    this.info = null;
+    this.storage.getFavorites().then((fav) => {
+      this.fileStorage.writeJsonFile(fav).then(() => {
+        this.info = 'File downloaded in Download folder';
+      }).catch((err) => {
+        this.info = err;
+      });
+    }).catch((e) => console.log(e));
+  }
 
   onJsonFileChange(event) {
     this.info = null;
@@ -83,7 +80,6 @@ export class SettingsPage implements OnInit {
                 });
               }
             });
-            console.log('test', actualFav);
             this.storage.set('favorites', actualFav).then(() => this.info = 'Favorites added').catch((e) => this.info = 'Error ' + e);
           });
 
