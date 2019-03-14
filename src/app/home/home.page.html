@@ -1,12 +1,22 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://beta.ionicframework.com/docs/">docs</a> will be your guide.</p>
+  <ion-tabs selectedIndex="0">
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="list/movie" (click)="update('movie')" [selected]="selected == 'movie'">
+        <ion-icon name="videocam"></ion-icon>
+        <ion-label>Movies</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="list/series" (click)="update('serie')" [selected]="selected == 'serie'">
+        <ion-icon name="tv"></ion-icon>
+        <ion-label>Series</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="favorites" (click)="update('fav')" [selected]="selected == 'fav'">
+        <ion-icon name="heart"></ion-icon>
+        <ion-label>Favorites</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="settings" (click)="update('settings')" [selected]="selected == 'settings'">
+        <ion-icon name="settings"></ion-icon>
+        <ion-label>Settings</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>

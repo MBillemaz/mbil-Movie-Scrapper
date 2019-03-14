@@ -74,4 +74,71 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+
+  // A new dark theme for ionic2+
+  // ----------------------------------------
+
+  // this can go into variables.scss too - I like 
+  // it here so its in one place. If you move it to variables.scss,
+  // remember to copy over the complete map and then extend it
+
+  --color: #DADFE1;
+  --ion-color: #DADFE1;
+  --ion-text-color: #DADFE1;
+  --ion-background-color: #363232;
+  --ion-subdued-text-color: #666;
+
+  --ion-font-family-base: "Helvetica Neue", "Roboto", sans-serif;
+  --ion-font-size-base: 1.4rem; // 1.4rem == 14px
+
+  --ion-content-padding: 16px;
+  --ion-content-margin: 16px;
+
+  --ion-content-outer-background: #000;
+
+  --ion-toolbar-background: #434343;
+  --ion-toolbar-border-color: #434343;
+
+  --ion-toolbar-active-color: --ion-link-color;
+  --ion-toolbar-inactive-color: #8c8c8c;
+
+  --ion-tabs-background: --ion-toolbar-background;
+  --ion-tabs-border-color: --ion-toolbar-border-color;
+  --ion-tabs-tab-color-inactive: #8c8c8c;
+  --ion-tabs-tab-color-active: --ion-link-color;
+
+  --ion-list-text-color: --ion-text-color;
+  --ion-list-background-color: #242424;
+  --ion-list-border-color: #4C4C4C;
+  --ion-list-header-color: --ion-text-color;
+  --ion-list-activated-background-color: #656565;
+
+
+  --ion-card-text-color: --ion-text-color;
+
+
+  --ion-item-divider-color: --ion-text-color;
+  --ion-item-divider-background: #515151;
+
+  --ion-ion-toast-background: #019875;
+
+
+  --ion-tabs-tab-color-inactive: #808080;
+
+  --ion-searchbar-input-text-color: #bdc3c7;
+  --ion-searchbar-input-placeholder-color: #A3A8AC;
+  --ion-searchbar-input-background-color: #313131;
+
+  --ion-toggle-background-color-off: #696969;
+  --ion-toggle-background-color-on: #eeae15;
+
+
+  --ion-alert-background: --ion-toolbar-background;
+  --ion-alert-button-background-color-activated: lighten(--ion-alert-background, 30%);
+  --ion-alert-message-text-color: --ion-text-color;
+  --ion-alert-input-background-color: #bdc3c7;
+  --ion-alert-input-text-color: #242424;
+
+  --ion-color-step-850: --ion-color;
 }
