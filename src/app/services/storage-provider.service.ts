@@ -20,6 +20,7 @@ export class StorageProviderService {
   }
 
   set(key: string, val: any) {
+    console.log('set', key, val);
     return this.storage.set(key, val).then(() => {
       this.storage.get(key).then((result) => {
         this.subject.next(result);

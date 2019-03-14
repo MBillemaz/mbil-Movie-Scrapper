@@ -42,6 +42,7 @@ export class DataProviderService {
             page: page ? page.toString() : '1'
         };
 
+        console.log(request);
         return this.http.get(this.dataLink, { ...request }, {});
     }
 
