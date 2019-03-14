@@ -14,7 +14,7 @@
 </ion-header>
 
 <ion-content padding text-center *ngIf="item != null">
-  <img [src]="'http://img.omdbapi.com/?apikey=75522b56&h=600&i=' + id" (error)="setDefaultImage($event)" />
+  <img [src]="'http://img.omdbapi.com/?apikey=75522b56&h=600&i=' + id" (error)="setDefaultImage($event)" onclick="window.open(this.src)"/>
   <ion-list>
     <ion-item *ngIf="trailerAvailable == true">
       <ion-label text-center>
