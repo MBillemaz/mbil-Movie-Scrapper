@@ -2,7 +2,7 @@ import { Platform } from '@ionic/angular';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Injectable } from '@angular/core';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-import { File } from '@ionic-native/file/ngx';
+import { File, FileEntry } from '@ionic-native/file/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class FileStorageService {
   writeJsonFile(item: any): Promise<any> {
     return new Promise((resolve, reject) => {
       if (this.isNative === false) {
-        const data = 'data:text/json;charser=utf8,' + encodeURIComponent(JSON.stringify(item));
+        const data = 'data:text/json;charset=utf8,' + encodeURIComponent(JSON.stringify(item));
         // this.downloadFile(data, 'favorites.json');
         const a = document.createElement('a');
         a.href = data;
@@ -41,7 +41,7 @@ export class FileStorageService {
               reject('Error during permission requesting : ' + err);
             });
           } else {
-            this.nativeWrite(item).then(() => resolve()).catch((err) => reject(err));
+            this.nativeWrite(item).then((file) => resolve(file)).catch((err) => reject(err));
           }
         }).catch((err) => {
           reject('Error during permission check : ' + err);
@@ -54,9 +54,8 @@ export class FileStorageService {
     return this.permissions.requestPermission(this.permissions.PERMISSION.WRITE_EXTERNAL_STORAGE);
   }
 
-  private nativeWrite(item: any) {
+  private nativeWrite(item: any): Promise<FileEntry> {
     const data = 'data:text/json;charset=utf8,' + encodeURIComponent(JSON.stringify(item));
-    console.log('Begin write');
     const fileTransfer: FileTransferObject = this.transfer.create();
     return fileTransfer.download(data, this.file.externalRootDirectory + 'Download/favorites.json');
   }

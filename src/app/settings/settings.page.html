@@ -9,6 +9,9 @@
   <p *ngIf="info != null"> Info : {{info}} </p>
 
   <div class="buttonList">
+    <div *ngIf="isNative == true">
+        <ion-button color="dark" (click)='share()'>Share favorites</ion-button>
+    </div>
     <div >
       <ion-button color="dark " (click)='downloadJsonFile()'>Export favorites</ion-button>
       <div id="download"></div>

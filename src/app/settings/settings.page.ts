@@ -1,3 +1,6 @@
+import { FileEntry } from '@ionic-native/file/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { Platform } from '@ionic/angular';
 import { FileStorageService } from './../services/file-storage.service';
 import { Favorites } from 'typings/storage';
 import { StorageProviderService } from './../services/storage-provider.service';
@@ -11,24 +14,47 @@ import { Component, OnInit } from '@angular/core';
 export class SettingsPage implements OnInit {
 
   public info;
-  constructor(public storage: StorageProviderService, public fileStorage: FileStorageService) { }
+  public isNative;
+
+  constructor(
+    private ptl: Platform,
+    public storage: StorageProviderService,
+    public fileStorage: FileStorageService,
+    public sharing: SocialSharing
+  ) {
+    this.isNative = ptl.is('cordova') ? true : false;
+  }
 
   ngOnInit(): void {
   }
 
-  // downloadJsonFile() {
-  //   this.storage.getFavorites().then((fav) => {
-  //     const data = 'data:text/json;charser=utf8,' + encodeURIComponent(JSON.stringify(fav));
-  //     // this.downloadFile(data, 'favorites.json');
-  //     const a = document.createElement('a');
-  //     a.href = data;
-  //     a.download = 'favorites.json';
-  //     document.getElementById('download').appendChild(a);
-  //     a.click();
-  //     document.getElementById('download').removeChild(a);
+  share() {
+    this.storage.getFavorites().then((fav) => {
 
-  //   }).catch((e) => console.log(e));
-  // }
+      this.fileStorage.writeJsonFile(fav).then((file: FileEntry | undefined) => {
+        if (file) {
+          const options = {
+            subject: 'Favorite movies',
+            chooserTitle: 'Share my favorites',
+            files: [file.nativeURL]
+          };
+
+          this.sharing.shareWithOptions(options).then((result) => {
+            if (result.completed) {
+              this.info = 'Favorites shared';
+            } else {
+              this.info = 'Sharing canceled';
+            }
+          }).catch((err) => this.info = 'Sharing error :' + err);
+        } else {
+          this.info = 'Error during file génération';
+        }
+      }).catch((err) => {
+        this.info = err;
+      });
+
+    });
+  }
 
   downloadJsonFile() {
     this.info = null;
